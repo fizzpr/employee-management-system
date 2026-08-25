@@ -1,0 +1,155 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              String           @id @default(uuid())
+  name            String
+  email           String           @unique
+  passwordHash    String
+  role            String           // "ADMIN", "MANAGER", "EMPLOYEE"
+  employeeId      String           @unique
+  departmentId    String?
+  department      Department?      @relation("UserDepartment", fields: [departmentId], references: [id])
+  managerId       String?
+  manager         User?            @relation("UserManager", fields: [managerId], references: [id])
+  subordinates    User[]           @relation("UserManager")
+  designation     String
+  profilePhoto    String?
+  joiningDate     DateTime         @default(now())
+  status          String           @default("ACTIVE") // "ACTIVE", "INACTIVE"
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // Settings / Allowances specific to employee
+  annualLeaveAllowance Int        @default(12)
+  usedLeaveAllowance   Int        @default(0)
+
+  // Relations
+  attendances      Attendance[]
+  wfhRequests      WfhRequest[]     @relation("UserWfh")
+  approvedWfhs     WfhRequest[]     @relation("ApprovedWfh")
+  leaveRequests    LeaveRequest[]   @relation("UserLeave")
+  approvedLeaves   LeaveRequest[]   @relation("ApprovedLeave")
+  assignedTasks    Task[]           @relation("AssignedTasks")
+  createdTasks     Task[]           @relation("CreatedTasks")
+  taskComments     TaskComment[]
+  notifications    Notification[]
+  managedDepartment Department?     @relation("DepartmentManager")
+}
+
+model Department {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  managerId   String?  @unique
+  manager     User?    @relation("DepartmentManager", fields: [managerId], references: [id])
+  employees   User[]   @relation("UserDepartment")
+  createdAt   DateTime @default(now())
+}
+
+model Attendance {
+  id           String    @id @default(uuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  date         String    // "YYYY-MM-DD"
+  clockIn      DateTime
+  clockOut     DateTime?
+  workingHours Float?    // in decimal hours
+  status       String    // "PRESENT", "LATE", "WFH", "LEAVE", "ABSENT"
+  lateMinutes  Int       @default(0)
+  notes        String?
+  createdAt    DateTime  @default(now())
+
+  @@unique([userId, date])
+}
+
+model WfhRequest {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation("UserWfh", fields: [userId], references: [id])
+  date           String   // "YYYY-MM-DD"
+  duration       String   // "FULL", "HALF"
+  reason         String
+  status         String   // "PENDING", "APPROVED", "REJECTED"
+  approvedById   String?
+  approvedBy     User?    @relation("ApprovedWfh", fields: [approvedById], references: [id])
+  managerComment String?
+  createdAt      DateTime @default(now())
+}
+
+model LeaveRequest {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation("UserLeave", fields: [userId], references: [id])
+  leaveType      String   // "CASUAL", "SICK", "EARNED", "EMERGENCY", "OTHER"
+  startDate      String   // "YYYY-MM-DD"
+  endDate        String   // "YYYY-MM-DD"
+  reason         String
+  status         String   // "PENDING", "APPROVED", "REJECTED"
+  approvedById   String?
+  approvedBy     User?    @relation("ApprovedLeave", fields: [approvedById], references: [id])
+  comment        String?
+  createdAt      DateTime @default(now())
+}
+
+model Task {
+  id             String        @id @default(uuid())
+  title          String
+  description    String
+  assignedToId   String
+  assignedTo     User          @relation("AssignedTasks", fields: [assignedToId], references: [id])
+  assignedById   String
+  assignedBy     User          @relation("CreatedTasks", fields: [assignedById], references: [id])
+  department     String?
+  priority       String        // "LOW", "MEDIUM", "HIGH", "URGENT"
+  status         String        // "ASSIGNED", "IN_PROGRESS", "REVIEW", "COMPLETED", "OVERDUE"
+  startDate      String        // "YYYY-MM-DD"
+  dueDate        String        // "YYYY-MM-DD"
+  completedAt    DateTime?
+  estimatedHours Float?
+  attachment     String?
+  createdAt      DateTime      @default(now())
+  comments       TaskComment[]
+}
+
+model TaskComment {
+  id        String   @id @default(uuid())
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  comment   String
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  message   String
+  type      String   // "WFH_STATUS", "LEAVE_STATUS", "TASK_ASSIGNED", "TASK_DEADLINE", "TASK_OVERDUE", "COMMENT_ADDED", "APPROVAL_REQUEST"
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model CompanySettings {
+  id             String  @id @default("default")
+  companyName    String  @default("Fizz PR Agency")
+  companyLogo    String?
+  workingDays    String  @default("MON,TUE,WED,THU,FRI")
+  officeStartTime String @default("09:30 AM")
+  officeEndTime   String @default("06:30 PM")
+  gracePeriod    Int     @default(15)
+  halfDayRules   String  @default("Clock in after 1:00 PM counts as half-day")
+  leaveTypes     String  @default("CASUAL,SICK,EARNED,EMERGENCY,OTHER")
+  leaveAllowance Int     @default(12)
+  carryForwardRules String @default("Up to 5 unused leaves can be carried forward")
+  taskStatuses   String  @default("ASSIGNED,IN_PROGRESS,REVIEW,COMPLETED,OVERDUE")
+  priorityLevels String  @default("LOW,MEDIUM,HIGH,URGENT")
+}
