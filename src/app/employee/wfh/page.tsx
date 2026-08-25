@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import WfhClient from './wfh-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function WfhPage() {
   const session = await getSession();
   if (!session) {

@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import WfhAdminClient from './wfh-admin-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminWfhPage() {
   const session = await getSession();
   if (!session || session.role !== 'ADMIN') {

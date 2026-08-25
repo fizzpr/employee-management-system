@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import LeaveClient from './leave-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function LeavePage() {
   const session = await getSession();
   if (!session) {

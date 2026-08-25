@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import ApprovalsClient from './approvals-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ApprovalsPage() {
   const session = await getSession();
   if (!session || (session.role !== 'MANAGER' && session.role !== 'ADMIN')) {

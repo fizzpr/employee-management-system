@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import CalendarClient from './calendar-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CalendarPage() {
   const session = await getSession();
   if (!session) {

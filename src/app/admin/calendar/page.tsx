@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import CalendarAdminClient from './calendar-admin-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminCalendarPage() {
   const session = await getSession();
   if (!session || session.role !== 'ADMIN') {

@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import ReportsClient from '@/components/reports-client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminReportsPage() {
   const session = await getSession();
   if (!session || session.role !== 'ADMIN') {

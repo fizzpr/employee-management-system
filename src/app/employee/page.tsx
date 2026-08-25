@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import ClockPanel from '@/components/clock-panel';
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import {
   Calendar,
   Briefcase,
