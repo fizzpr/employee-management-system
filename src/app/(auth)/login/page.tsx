@@ -48,8 +48,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-8">
         {/* Brand header */}
         <div className="text-center">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md">
-            <Building className="h-6 w-6" />
+          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2.5 shadow-md border border-slate-100">
+            <img src="/logo.png" alt="Fizz PR" className="h-full w-full object-contain" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-slate-900 tracking-tight">
             Sign in to Fizz PR

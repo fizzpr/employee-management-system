@@ -125,8 +125,10 @@ export default function Sidebar({ role, userName, isOpen = false, onClose }: Sid
     <div className="flex h-full flex-col bg-slate-900 text-slate-400">
       {/* Brand logo header */}
       <div className="flex h-16 items-center justify-between border-b border-slate-800 px-6">
-        <div className="flex items-center gap-2">
-          <Building className="h-6 w-6 text-indigo-400" />
+        <div className="flex items-center gap-3">
+          <div className="h-9 w-9 rounded-xl bg-white p-1 flex items-center justify-center shadow-xs shrink-0">
+            <img src="/logo.png" alt="Fizz PR" className="h-full w-full object-contain" />
+          </div>
           <span className="text-lg font-bold text-white tracking-wide">Fizz PR Portal</span>
         </div>
         {onClose && (
