@@ -65,8 +65,10 @@ export default function Topbar({ userName, designation, departmentName, userId }
 
   const handleMarkAsRead = async (id: string) => {
     try {
-      const res = await fetch(`/api/notifications/${id}/read`, {
+      const res = await fetch('/api/notifications/read', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
       });
       if (res.ok) {
         setNotifications(prev =>
