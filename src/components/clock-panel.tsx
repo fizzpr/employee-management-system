@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { clockInAction, clockOutAction } from '@/lib/actions/attendance-actions';
 import { Clock, CheckCircle2, Play, Square, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { formatTimeDisplay } from '@/lib/time-utils';
+import PunchModal from '@/components/punch-modal';
 
 interface ClockPanelProps {
   todayAttendance: {
@@ -18,42 +18,17 @@ interface ClockPanelProps {
 }
 
 export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday }: ClockPanelProps) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [punchType, setPunchType] = useState<'in' | 'out'>('in');
 
-  const handleClockIn = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await clockInAction();
-      if (res?.error) {
-        setError(res.error);
-      } else {
-        router.refresh();
-      }
-    } catch (err) {
-      setError('Failed to clock in. Try again.');
-    } finally {
-      setLoading(false);
-    }
+  const handleOpenPunch = (type: 'in' | 'out') => {
+    setPunchType(type);
+    setIsModalOpen(true);
   };
 
-  const handleClockOut = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await clockOutAction();
-      if (res?.error) {
-        setError(res.error);
-      } else {
-        router.refresh();
-      }
-    } catch (err) {
-      setError('Failed to clock out. Try again.');
-    } finally {
-      setLoading(false);
-    }
+  const handlePunchSuccess = () => {
+    router.refresh();
   };
 
   const formatTime = (dateObj: Date | null) => {
@@ -93,18 +68,12 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
           <h2 className="text-base sm:text-lg font-bold text-slate-800">{"Today's Attendance"}</h2>
-          <p className="text-xs text-slate-500">Log your daily work hours</p>
+          <p className="text-xs text-slate-500">Log your daily work hours with photo & location</p>
         </div>
         <span className={`rounded-full border px-3 py-1 text-xs font-bold ${badgeColor}`}>
           {currentStatus}
         </span>
       </div>
-
-      {error && (
-        <div className="mt-4 rounded-xl bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100">
-          {error}
-        </div>
-      )}
 
       {/* Clock Details Grid */}
       <div className="mt-5 sm:mt-6 grid grid-cols-3 gap-2.5 sm:gap-4 text-center">
@@ -136,45 +105,39 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
       <div className="mt-5 sm:mt-6 flex gap-3 sm:gap-4">
         {canClockIn && (
           <button
-            onClick={handleClockIn}
-            disabled={loading}
-            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-green-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-green-700 disabled:bg-green-400 transition touch-target"
+            onClick={() => handleOpenPunch('in')}
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-green-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-green-700 transition touch-target"
           >
-            {loading ? (
-              <Loader2 className="h-4.5 w-4.5 animate-spin" />
-            ) : (
-              <>
-                <Play className="h-4.5 w-4.5 fill-current" />
-                Clock In
-              </>
-            )}
+            <Play className="h-4.5 w-4.5 fill-current" />
+            Clock In
           </button>
         )}
 
         {canClockOut && (
           <button
-            onClick={handleClockOut}
-            disabled={loading}
-            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-red-700 disabled:bg-red-400 transition touch-target"
+            onClick={() => handleOpenPunch('out')}
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-red-700 transition touch-target"
           >
-            {loading ? (
-              <Loader2 className="h-4.5 w-4.5 animate-spin" />
-            ) : (
-              <>
-                <Square className="h-4.5 w-4.5 fill-current" />
-                Clock Out
-              </>
-            )}
+            <Square className="h-4.5 w-4.5 fill-current" />
+            Clock Out
           </button>
         )}
 
         {!canClockIn && !canClockOut && (
           <div className="w-full flex items-center justify-center gap-2 rounded-xl bg-slate-100 py-3.5 text-sm font-bold text-slate-400 border border-slate-200">
-            <CheckCircle2 className="h-4.5 w-4.5" />
+            <CheckCircle2 className="h-4.5 w-4.5 text-green-600" />
             Logs Complete
           </div>
         )}
       </div>
+
+      {/* Punch Modal for Camera + Geolocation */}
+      <PunchModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        punchType={punchType}
+        onSuccess={handlePunchSuccess}
+      />
     </div>
   );
 }

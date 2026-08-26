@@ -64,6 +64,14 @@ model Attendance {
   status       String    // "PRESENT", "LATE", "WFH", "LEAVE", "ABSENT"
   lateMinutes  Int       @default(0)
   notes        String?
+  punchInPhoto   String?
+  punchInLat     Float?
+  punchInLng     Float?
+  punchInAddress String?
+  punchOutPhoto  String?
+  punchOutLat    Float?
+  punchOutLng    Float?
+  punchOutAddress String?
   createdAt    DateTime  @default(now())
 
   @@unique([userId, date])

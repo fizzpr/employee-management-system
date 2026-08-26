@@ -171,34 +171,30 @@ export default async function EmployeeDashboardPage() {
           <h2 className="text-base sm:text-lg font-bold text-slate-800">Monthly Summary — {now.toLocaleString('default', { month: 'long' })}</h2>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-4 lg:grid-cols-7">
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-xs">
             <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">Working Days</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-slate-800">{weekdaysUpToToday}</p>
+            <p className="mt-1 text-xl font-extrabold text-slate-800">{weekdaysUpToToday}</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-xs">
             <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">Days Present</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-green-600">{daysPresent}</p>
+            <p className="mt-1 text-xl font-extrabold text-green-600">{daysPresent}</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-xs">
             <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">WFH Days</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-teal-600">{daysWfh}</p>
+            <p className="mt-1 text-xl font-extrabold text-teal-600">{daysWfh}</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-xs">
             <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">Leaves Taken</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-blue-600">{daysLeave}</p>
+            <p className="mt-1 text-xl font-extrabold text-blue-600">{daysLeave}</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-xs">
             <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">Days Late</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-amber-500">{daysLate}</p>
+            <p className="mt-1 text-xl font-extrabold text-amber-500">{daysLate}</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-            <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">Absences</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-red-500">{daysAbsent}</p>
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs col-span-2 sm:col-span-1">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-xs col-span-2 sm:col-span-1">
             <span className="text-[10px] font-bold text-slate-400 uppercase block truncate">Avg Hours/Day</span>
-            <p className="mt-1 text-xl sm:text-2xl font-bold text-indigo-600">{avgHours}h</p>
+            <p className="mt-1 text-xl font-extrabold text-indigo-600">{avgHours}h</p>
           </div>
         </div>
       </div>

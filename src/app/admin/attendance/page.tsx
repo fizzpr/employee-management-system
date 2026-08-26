@@ -33,6 +33,7 @@ export default async function AdminAttendancePage() {
     userName: log.user.name,
     userEmployeeId: log.user.employeeId,
     designation: log.user.designation,
+    role: log.user.role,
     departmentName: log.user.department?.name || 'General',
     date: log.date,
     clockIn: log.clockIn.toISOString(),
@@ -41,6 +42,14 @@ export default async function AdminAttendancePage() {
     status: log.status,
     lateMinutes: log.lateMinutes,
     notes: log.notes,
+    punchInPhoto: log.punchInPhoto || null,
+    punchInLat: log.punchInLat || null,
+    punchInLng: log.punchInLng || null,
+    punchInAddress: log.punchInAddress || null,
+    punchOutPhoto: log.punchOutPhoto || null,
+    punchOutLat: log.punchOutLat || null,
+    punchOutLng: log.punchOutLng || null,
+    punchOutAddress: log.punchOutAddress || null,
   }));
 
   return (

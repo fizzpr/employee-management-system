@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="font-sans">
       <body className="antialiased bg-slate-50 text-slate-900 min-h-screen">
         <PwaInstallProvider>{children}</PwaInstallProvider>
       </body>

@@ -137,42 +137,50 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Grid Statistics */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9">
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Headcount</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-slate-800">{totalEmployeesCount}</p>
+      {/* Grid Statistics Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Total Headcount</span>
+            <p className="mt-1 text-2xl font-extrabold text-slate-800">{totalEmployeesCount}</p>
+            <p className="text-[11px] font-semibold text-slate-500 mt-0.5">Active Employees</p>
+          </div>
+          <div className="rounded-2xl bg-indigo-50 p-3 text-indigo-600">
+            <Users className="h-6 w-6" />
+          </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Present</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-green-600">{presentCount}</p>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Present Today</span>
+            <p className="mt-1 text-2xl font-extrabold text-green-600">{presentCount}</p>
+            <p className="text-[11px] font-semibold text-slate-500 mt-0.5">{lateCount} Late Check-ins</p>
+          </div>
+          <div className="rounded-2xl bg-green-50 p-3 text-green-600">
+            <CheckCircle className="h-6 w-6" />
+          </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">WFH</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-teal-600">{wfhCount}</p>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Remote / WFH</span>
+            <p className="mt-1 text-2xl font-extrabold text-teal-600">{wfhCount}</p>
+            <p className="text-[11px] font-semibold text-slate-500 mt-0.5">{leaveCount} On Leave Today</p>
+          </div>
+          <div className="rounded-2xl bg-teal-50 p-3 text-teal-600">
+            <Home className="h-6 w-6" />
+          </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Leave</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-blue-600">{leaveCount}</p>
-        </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Absent</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-red-500">{absentCount}</p>
-        </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Late</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-amber-500">{lateCount}</p>
-        </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Assigned</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-indigo-600">{tasksAssigned}</p>
-        </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Completed</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-green-600">{tasksCompleted}</p>
-        </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-center shadow-xs col-span-2 sm:col-span-1">
-          <span className="text-[9px] font-bold text-slate-400 uppercase block truncate">Overdue</span>
-          <p className="mt-1 text-lg sm:text-xl font-extrabold text-red-600">{tasksOverdue}</p>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs flex items-center justify-between">
+          <div>
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Task Productivity</span>
+            <p className="mt-1 text-2xl font-extrabold text-indigo-600">{tasksCompleted}/{tasksAssigned}</p>
+            <p className="text-[11px] font-semibold text-red-500 mt-0.5">{tasksOverdue} Tasks Overdue</p>
+          </div>
+          <div className="rounded-2xl bg-indigo-50 p-3 text-indigo-600">
+            <Clock className="h-6 w-6" />
+          </div>
         </div>
       </div>
 
