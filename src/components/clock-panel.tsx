@@ -63,7 +63,6 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
     });
   };
 
-  // Determine current status state
   let currentStatus = 'Not Started';
   let badgeColor = 'bg-slate-100 text-slate-700 border-slate-200';
   let canClockIn = true;
@@ -93,40 +92,40 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
-          <h2 className="text-lg font-bold text-slate-800">{"Today's Attendance"}</h2>
+          <h2 className="text-base sm:text-lg font-bold text-slate-800">{"Today's Attendance"}</h2>
           <p className="text-xs text-slate-500">Log your daily work hours</p>
         </div>
-        <span className={`rounded-full border px-3 py-1.5 text-xs font-bold ${badgeColor}`}>
+        <span className={`rounded-full border px-3 py-1 text-xs font-bold ${badgeColor}`}>
           {currentStatus}
         </span>
       </div>
 
       {error && (
-        <div className="mt-4 rounded-lg bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100">
+        <div className="mt-4 rounded-xl bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100">
           {error}
         </div>
       )}
 
       {/* Clock Details Grid */}
-      <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-        <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-100">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Clock In</p>
-          <p className="mt-1 text-sm font-bold text-slate-700">
+      <div className="mt-5 sm:mt-6 grid grid-cols-3 gap-2.5 sm:gap-4 text-center">
+        <div className="rounded-xl bg-slate-50 p-3 sm:p-3.5 border border-slate-100">
+          <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">Clock In</p>
+          <p className="mt-1 text-xs sm:text-sm font-bold text-slate-700">
             {todayAttendance ? formatTime(todayAttendance.clockIn) : '--:--'}
           </p>
         </div>
-        <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-100">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Clock Out</p>
-          <p className="mt-1 text-sm font-bold text-slate-700">
+        <div className="rounded-xl bg-slate-50 p-3 sm:p-3.5 border border-slate-100">
+          <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">Clock Out</p>
+          <p className="mt-1 text-xs sm:text-sm font-bold text-slate-700">
             {todayAttendance && todayAttendance.clockOut ? formatTime(todayAttendance.clockOut) : '--:--'}
           </p>
         </div>
-        <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-100">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Working Hours</p>
-          <p className="mt-1 text-sm font-bold text-slate-700">
+        <div className="rounded-xl bg-slate-50 p-3 sm:p-3.5 border border-slate-100">
+          <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">Hours</p>
+          <p className="mt-1 text-xs sm:text-sm font-bold text-slate-700">
             {todayAttendance
               ? todayAttendance.workingHours 
                 ? `${todayAttendance.workingHours}h` 
@@ -137,12 +136,12 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
       </div>
 
       {/* Action Buttons */}
-      <div className="mt-6 flex gap-4">
+      <div className="mt-5 sm:mt-6 flex gap-3 sm:gap-4">
         {canClockIn && (
           <button
             onClick={handleClockIn}
             disabled={loading}
-            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-green-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-green-700 disabled:bg-green-400 transition"
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-green-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-green-700 disabled:bg-green-400 transition touch-target"
           >
             {loading ? (
               <Loader2 className="h-4.5 w-4.5 animate-spin" />
@@ -159,7 +158,7 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
           <button
             onClick={handleClockOut}
             disabled={loading}
-            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-red-700 disabled:bg-red-400 transition"
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-red-600 py-3.5 px-4 text-sm font-bold text-white shadow-md hover:bg-red-700 disabled:bg-red-400 transition touch-target"
           >
             {loading ? (
               <Loader2 className="h-4.5 w-4.5 animate-spin" />

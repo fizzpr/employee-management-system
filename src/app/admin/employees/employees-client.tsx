@@ -327,9 +327,9 @@ export default function EmployeesClient({ employees, departments, managers }: Em
 
       {/* Add Employee Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900 bg-opacity-50 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-lg rounded-2xl bg-white shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between border-b border-slate-100 p-6">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/60 p-3 sm:p-4 backdrop-blur-sm animate-fadeIn overflow-y-auto">
+          <div className="w-full max-w-lg rounded-t-2xl sm:rounded-2xl bg-white shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-slate-100 p-4 sm:p-6">
               <h2 className="text-base font-bold text-slate-800">Add New Employee</h2>
               <button
                 onClick={() => setShowAddModal(false)}
@@ -339,15 +339,15 @@ export default function EmployeesClient({ employees, departments, managers }: Em
               </button>
             </div>
 
-            <form onSubmit={handleAddSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleAddSubmit} className="p-4 sm:p-6 space-y-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100 flex items-center gap-2">
+                <div className="rounded-xl bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100 flex items-center gap-2">
                   <AlertCircle className="h-4.5 w-4.5" />
                   {error}
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-600 uppercase">Full Name</label>
                   <input
@@ -487,9 +487,9 @@ export default function EmployeesClient({ employees, departments, managers }: Em
 
       {/* Edit Employee Modal */}
       {editingEmployee && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900 bg-opacity-50 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-lg rounded-2xl bg-white shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between border-b border-slate-100 p-6">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/60 p-3 sm:p-4 backdrop-blur-sm animate-fadeIn overflow-y-auto">
+          <div className="w-full max-w-lg rounded-t-2xl sm:rounded-2xl bg-white shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-slate-100 p-4 sm:p-6">
               <h2 className="text-base font-bold text-slate-800">Edit Employee Profile</h2>
               <button
                 onClick={() => setEditingEmployee(null)}
@@ -499,15 +499,15 @@ export default function EmployeesClient({ employees, departments, managers }: Em
               </button>
             </div>
 
-            <form onSubmit={handleEditSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleEditSubmit} className="p-4 sm:p-6 space-y-4">
               {error && (
-                <div className="rounded-lg bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100 flex items-center gap-2">
+                <div className="rounded-xl bg-red-50 p-3 text-xs font-semibold text-red-600 border border-red-100 flex items-center gap-2">
                   <AlertCircle className="h-4.5 w-4.5" />
                   {error}
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-600 uppercase">Full Name</label>
                   <input

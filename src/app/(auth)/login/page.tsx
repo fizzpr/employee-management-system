@@ -83,7 +83,7 @@ export default function LoginPage() {
                   type="email"
                   required
                   placeholder="name@company.com"
-                  className="block w-full rounded-xl border border-slate-200 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="block w-full rounded-xl border border-slate-200 py-3 pl-11 pr-4 text-base sm:text-sm outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder="••••••••"
-                  className="block w-full rounded-xl border border-slate-200 py-3 pl-11 pr-10 text-sm outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="block w-full rounded-xl border border-slate-200 py-3 pl-11 pr-10 text-base sm:text-sm outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
                 <button
                   type="button"
@@ -142,7 +142,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3 px-4 text-sm font-semibold text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-400 disabled:cursor-not-allowed transition"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3.5 px-4 text-sm font-semibold text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-400 disabled:cursor-not-allowed transition touch-target"
             >
               {loading ? (
                 <>

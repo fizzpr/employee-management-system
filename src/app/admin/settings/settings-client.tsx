@@ -280,7 +280,7 @@ export default function SettingsClient({ settings, adminName, adminEmail }: Sett
                 name="adminEmail"
                 required
                 defaultValue={adminEmail}
-                placeholder="superadmin@vspark.com"
+                placeholder="superadmin@fizzpr.com"
                 className="mt-1.5 block w-full rounded-xl border border-slate-200 py-3 px-4 text-sm outline-none focus:border-indigo-500"
               />
             </div>

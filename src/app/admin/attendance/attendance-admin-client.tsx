@@ -134,8 +134,8 @@ export default function AttendanceAdminClient({
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto table-wrapper">
+          <table className="w-full text-left border-collapse min-w-[640px]">
             <thead>
               <tr className="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase border-b border-slate-100">
                 <th className="px-6 py-3">Employee</th>

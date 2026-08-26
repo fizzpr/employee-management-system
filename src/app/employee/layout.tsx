@@ -1,5 +1,4 @@
-import Sidebar from '@/components/sidebar';
-import Topbar from '@/components/topbar';
+import DashboardLayoutClient from '@/components/dashboard-layout-client';
 import { getSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
@@ -20,17 +19,14 @@ export default async function EmployeeLayout({
   });
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <Sidebar role="EMPLOYEE" userName={session.name} />
-      <div className="pl-64">
-        <Topbar
-          userName={session.name}
-          designation={user?.designation || 'Employee'}
-          departmentName={user?.department?.name}
-          userId={session.userId}
-        />
-        <main className="pt-16 min-h-screen">{children}</main>
-      </div>
-    </div>
+    <DashboardLayoutClient
+      role="EMPLOYEE"
+      userName={session.name}
+      designation={user?.designation || 'Employee'}
+      departmentName={user?.department?.name}
+      userId={session.userId}
+    >
+      {children}
+    </DashboardLayoutClient>
   );
 }

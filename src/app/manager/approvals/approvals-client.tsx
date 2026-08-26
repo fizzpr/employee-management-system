@@ -143,17 +143,17 @@ export default function ApprovalsClient({ wfhRequests, leaveRequests }: Approval
                     <button
                       onClick={() => handleWfhDecision(req.id, 'REJECTED')}
                       disabled={loadingId === req.id}
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 py-2 text-xs font-bold text-slate-700 hover:bg-red-50 hover:text-red-700 hover:border-red-150 transition"
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 py-2.5 text-xs font-bold text-slate-700 hover:bg-red-50 hover:text-red-700 hover:border-red-150 transition touch-target"
                     >
-                      <X className="h-3.5 w-3.5" />
+                      <X className="h-4 w-4" />
                       Reject
                     </button>
                     <button
                       onClick={() => handleWfhDecision(req.id, 'APPROVED')}
                       disabled={loadingId === req.id}
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-lg bg-teal-600 py-2 text-xs font-bold text-white shadow-xs hover:bg-teal-700 transition"
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-teal-600 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-teal-700 transition touch-target"
                     >
-                      {loadingId === req.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+                      {loadingId === req.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
                       Approve
                     </button>
                   </div>
@@ -212,17 +212,17 @@ export default function ApprovalsClient({ wfhRequests, leaveRequests }: Approval
                     <button
                       onClick={() => handleLeaveDecision(req.id, 'REJECTED')}
                       disabled={loadingId === req.id}
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 py-2 text-xs font-bold text-slate-700 hover:bg-red-50 hover:text-red-700 hover:border-red-150 transition"
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 py-2.5 text-xs font-bold text-slate-700 hover:bg-red-50 hover:text-red-700 hover:border-red-150 transition touch-target"
                     >
-                      <X className="h-3.5 w-3.5" />
+                      <X className="h-4 w-4" />
                       Reject
                     </button>
                     <button
                       onClick={() => handleLeaveDecision(req.id, 'APPROVED')}
                       disabled={loadingId === req.id}
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-lg bg-indigo-600 py-2 text-xs font-bold text-white shadow-xs hover:bg-indigo-700 transition"
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-indigo-600 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-indigo-700 transition touch-target"
                     >
-                      {loadingId === req.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+                      {loadingId === req.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
                       Approve
                     </button>
                   </div>
