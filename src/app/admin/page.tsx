@@ -2,6 +2,7 @@ import { getSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { formatTimeDisplay } from '@/lib/time-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -71,9 +72,9 @@ export default async function AdminDashboardPage() {
 
     if (attendance) {
       status = attendance.status;
-      clockInStr = new Date(attendance.clockIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      clockInStr = formatTimeDisplay(attendance.clockIn);
       if (attendance.clockOut) {
-        clockOutStr = new Date(attendance.clockOut).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        clockOutStr = formatTimeDisplay(attendance.clockOut);
       }
       workingHours = attendance.workingHours || 0;
       lateMinutes = attendance.lateMinutes || 0;

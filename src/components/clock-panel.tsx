@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { clockInAction, clockOutAction } from '@/lib/actions/attendance-actions';
 import { Clock, CheckCircle2, Play, Square, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { formatTimeDisplay } from '@/lib/time-utils';
 
 interface ClockPanelProps {
   todayAttendance: {
@@ -56,11 +57,7 @@ export default function ClockPanel({ todayAttendance, hasWfhToday, hasLeaveToday
   };
 
   const formatTime = (dateObj: Date | null) => {
-    if (!dateObj) return '--:--';
-    return new Date(dateObj).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    return formatTimeDisplay(dateObj);
   };
 
   let currentStatus = 'Not Started';

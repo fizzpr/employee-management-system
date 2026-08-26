@@ -3,6 +3,7 @@ import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import ClockPanel from '@/components/clock-panel';
 import Link from 'next/link';
+import { formatTimeDisplay } from '@/lib/time-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -221,10 +222,8 @@ export default async function EmployeeDashboardPage() {
               </div>
             ) : (
               monthlyLogs.slice(0, 5).map((log) => {
-                const clockInTime = new Date(log.clockIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                const clockOutTime = log.clockOut
-                  ? new Date(log.clockOut).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                  : '--:--';
+                const clockInTime = formatTimeDisplay(log.clockIn);
+                const clockOutTime = formatTimeDisplay(log.clockOut);
 
                 return (
                   <div

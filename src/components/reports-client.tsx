@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { formatTimeDisplay } from '@/lib/time-utils';
 import {
   FileSpreadsheet,
   Download,
@@ -139,8 +140,8 @@ export default function ReportsClient({
       log.userEmployeeId,
       log.departmentName,
       log.date,
-      log.clockIn ? new Date(log.clockIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '',
-      log.clockOut ? new Date(log.clockOut).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '',
+      log.clockIn ? formatTimeDisplay(log.clockIn) : '',
+      log.clockOut ? formatTimeDisplay(log.clockOut) : '',
       log.workingHours || 0,
       log.status,
       log.lateMinutes,
@@ -338,12 +339,8 @@ export default function ReportsClient({
                       </td>
                       <td className="px-6 py-4 text-slate-500">{row.departmentName}</td>
                       <td className="px-6 py-4">{row.date}</td>
-                      <td className="px-6 py-4">
-                        {row.clockIn ? new Date(row.clockIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
-                      </td>
-                      <td className="px-6 py-4">
-                        {row.clockOut ? new Date(row.clockOut).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
-                      </td>
+                      <td className="px-6 py-4">{formatTimeDisplay(row.clockIn)}</td>
+                      <td className="px-6 py-4">{formatTimeDisplay(row.clockOut)}</td>
                       <td className="px-6 py-4">{row.workingHours ? `${row.workingHours}h` : '--'}</td>
                       <td className="px-6 py-4">
                         <span

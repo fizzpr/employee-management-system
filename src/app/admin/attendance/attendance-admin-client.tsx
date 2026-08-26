@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Search, Calendar, Filter, Clock, Users, ArrowUpRight } from 'lucide-react';
+import { formatTimeDisplay } from '@/lib/time-utils';
 
 interface DepartmentItem {
   id: string;
@@ -163,12 +164,8 @@ export default function AttendanceAdminClient({
                       <p className="text-[10px] text-slate-400 font-medium">{row.designation} • {row.userEmployeeId}</p>
                     </td>
                     <td className="px-6 py-4 text-slate-500">{row.departmentName}</td>
-                    <td className="px-6 py-4">
-                      {row.clockIn ? new Date(row.clockIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
-                    </td>
-                    <td className="px-6 py-4">
-                      {row.clockOut ? new Date(row.clockOut).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
-                    </td>
+                    <td className="px-6 py-4">{formatTimeDisplay(row.clockIn)}</td>
+                    <td className="px-6 py-4">{formatTimeDisplay(row.clockOut)}</td>
                     <td className="px-6 py-4">{row.workingHours ? `${row.workingHours}h` : '--'}</td>
                     <td className="px-6 py-4">
                       <span
